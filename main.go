@@ -45,5 +45,6 @@ func main() {
 	fmt.Println("generating text")
 	generatedText := markov.generateText(states, firstWord, count)
 	fmt.Println("")
-	fmt.Println(generatedText)
+	fmt.Println("generated text")
+	fmt.Println("\x1b[32;1m" + generatedText + "\x1b[0m")
 }
