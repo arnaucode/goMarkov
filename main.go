@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func readText(path string) (string, error) {
+func readTxt(path string) (string, error) {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		//Do something
@@ -38,10 +38,11 @@ func main() {
 		fmt.Println("incorrect entry, need a positive number")
 	}
 
-	text, _ := readText("text.txt")
+	text, _ := readTxt("text.txt")
 
-	fmt.Println("generating text")
+	fmt.Println("generating markov chains")
 	states := markov.train(text)
+	fmt.Println("generating text")
 	generatedText := markov.generateText(states, firstWord, count)
 	fmt.Println("")
 	fmt.Println(generatedText)

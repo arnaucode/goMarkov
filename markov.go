@@ -18,6 +18,17 @@ type State struct {
 
 var markov Markov
 
+func printLoading(n int, total int) {
+	var bar []string
+	tantPerFourty := int((float64(n) / float64(total)) * 40)
+	tantPerCent := int((float64(n) / float64(total)) * 100)
+	for i := 0; i < tantPerFourty; i++ {
+		bar = append(bar, "█")
+	}
+	progressBar := strings.Join(bar, "")
+	fmt.Printf("\r " + progressBar + " - " + strconv.Itoa(tantPerCent) + "%")
+}
+
 func addWordToStates(states []State, word string) ([]State, int) {
 	iState := -1
 	for i := 0; i < len(states); i++ {
@@ -48,6 +59,8 @@ func calcMarkovStates(words []string) []State {
 		if iState < len(words) {
 			states[iState].NextStates, _ = addWordToStates(states[iState].NextStates, words[i+1])
 		}
+
+		printLoading(i, len(words))
 	}
 
 	//count prob
